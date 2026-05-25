@@ -1,6 +1,6 @@
 #include <Modulino.h>
 
-ModulinoOptoRelay relay;
+ModulinoLatchRelay relay;
 
 // Timing configuration
 const unsigned long ON_DURATION = 5000;   // 5 seconds on
@@ -19,7 +19,7 @@ void setup() {
   Serial.println("ON: 5 seconds, OFF: 10 seconds");
   
   // Start with relay off
-  relay.off();
+  relay.reset();
   lastChangeTime = millis();
 }
 
@@ -31,7 +31,7 @@ void loop() {
   if (relayState) {
     // Relay is ON, check if on-duration has elapsed
     if (elapsed >= ON_DURATION) {
-      relay.off();
+      relay.reset();
       relayState = false;
       lastChangeTime = currentTime;
       
@@ -43,7 +43,7 @@ void loop() {
   } else {
     // Relay is OFF, check if off-duration has elapsed
     if (elapsed >= OFF_DURATION) {
-      relay.on();
+      relay.set();
       relayState = true;
       lastChangeTime = currentTime;
       

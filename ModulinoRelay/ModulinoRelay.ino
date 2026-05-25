@@ -1,6 +1,6 @@
 #include <Modulino.h>
 
-ModulinoRelay relay;
+ModulinoLatchRelay relay;
 
 void setup() {
   Serial.begin(9600);
@@ -13,11 +13,11 @@ void setup() {
 void loop() {
   // Turn relay on
   Serial.println("Relay ON");
-  relay.on();
+  relay.set();
   delay(2000);
   
   // Turn relay off
   Serial.println("Relay OFF");
-  relay.off();
+  relay.reset();
   delay(2000);
 }
